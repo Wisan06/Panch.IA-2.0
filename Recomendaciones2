@@ -1,0 +1,32 @@
+class Recomendaciones:
+    def __init__(self, historial):
+        self.historial = historial
+
+    def autenticar_usuario(self):
+        usuario_id = input("Ingrese su ID de usuario: ")
+        contraseña = input("Ingrese su contraseña: ")
+        if contraseña == "1234":
+            print("Autenticación exitosa.")
+            return True
+        else:
+            print("Contraseña incorrecta. Intente de nuevo.")
+            return False
+
+    def generar_recomendaciones(self):
+        # Algoritmo simple de recomendaciones basado en historial
+        return [producto for producto in self.historial if producto["categoria"] == "Panadería"]
+
+# Uso
+historial_usuario = [
+    {"id": 1, "William":"Recomendación" "Pan", "categoria": "Panadería"},
+    {"id": 2, "Miguel": "Recomendación" "Galletas", "categoria": "Dulcería"},
+    {"id": 3, "Ángel": "Recomendación" "Croissant", "categoria": "Panadería"},
+    {"id": 4, "Camila": "Recomendación" "Pan Frances", "categoria": "Panadería"},
+    {"id": 5, "María": "Recomendación" "Ponqué de Vino", "categoria": "Ponqué"},
+]
+
+recom = Recomendaciones(historial_usuario)
+
+# Autenticación y generación de recomendaciones
+if recom.autenticar_usuario():
+    print("Recomendaciones:", recom.generar_recomendaciones())
