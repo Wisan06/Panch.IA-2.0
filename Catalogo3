@@ -1,0 +1,13 @@
+import webbrowser
+
+class CatalogoProductos:
+    def __init__(self, url):
+        self.url = url
+
+    def abrir_catalogo(self):
+        webbrowser.open(self.url)
+        print(f"Redirigiendo al catálogo de productos: {self.url}")
+
+# Uso
+catalogo = CatalogoProductos("https://comapan.apedir.co/marcas/Comapan")
+catalogo.abrir_catalogo()
