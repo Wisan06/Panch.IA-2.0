@@ -1,0 +1,51 @@
+class Recomendaciones:
+    def __init__(self, historial):
+        self.historial = historial
+        self.usuario_id = None  # Almacena el ID del usuario autenticado
+
+    def autenticar_usuario(self):
+        self.usuario_id = input("Ingrese su ID de usuario: ")
+        contraseña = input("Ingrese su contraseña: ")
+        if contraseña == "1234":
+            print("Autenticación exitosa.")
+            return True
+        else:
+            print("Contraseña incorrecta. Intente de nuevo.")
+            return False
+
+    def generar_recomendaciones(self):
+        # Filtrar el historial para el usuario autenticado
+        productos_usuario = [
+            producto for producto in self.historial if producto["id"] == int(self.usuario_id)
+        ]
+        
+        recomendaciones = []
+        
+        # Generar recomendaciones basadas en las categorías de productos en el historial
+        for producto in productos_usuario:
+            if producto["categoria"] == "Panadería":
+                recomendaciones.append("Pan de Hamburguesa")
+            elif producto["categoria"] == "Galletas":
+                recomendaciones.append("Pan de Frutos Rojos")
+            elif producto["categoria"] == "Ponqué":
+                recomendaciones.append("Chocolitas")
+        
+        return recomendaciones
+
+# Uso
+historial_usuario = [
+    {"id": 1, "William":"Recomendación" "Pan Integral", "categoria": "Panadería"},
+    {"id": 2, "Miguel": "Recomendación" "Galletas Surtidas", "categoria": "Galletas"},
+    {"id": 3, "Ángel": "Recomendación" "Caladitas", "categoria": "Panadería"},
+    {"id": 4, "Camila": "Recomendación" "Pan Frutos Rojos", "categoria": "Panadería"},
+    {"id": 5, "María": "Recomendación" "Ponqué de Vino", "categoria": "Ponqué"}
+]
+recom = Recomendaciones(historial_usuario)
+
+# Autenticación y generación de recomendaciones
+if recom.autenticar_usuario():
+    recomendaciones = recom.generar_recomendaciones()
+    if recomendaciones:
+        print("Recomendaciones:", recomendaciones)
+    else:
+        print("No se encontraron recomendaciones.")
