@@ -1,0 +1,13 @@
+class Recomendaciones:
+    def __init__(self, historial):
+        self.historial = historial
+
+    def generar_recomendaciones(self):
+        # Algoritmo simple de recomendaciones basado en historial
+        return [producto for producto in self.historial if producto["categoria"] == "Panadería"]
+
+# Uso
+historial_usuario = [{"id": 1, "nombre": "Pan", "categoria": "Panadería"},
+                     {"id": 2, "nombre": "Galletas", "categoria": "Dulcería"}]
+recom = Recomendaciones(historial_usuario)
+print("Recomendaciones:", recom.generar_recomendaciones())
