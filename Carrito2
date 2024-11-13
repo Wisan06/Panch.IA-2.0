@@ -1,0 +1,60 @@
+class CarritoCompras:
+    def __init__(self):
+        self.productos = [
+            {"id": 1, "nombre": "Pan Hamburguesa x6 Und", "precio": 4300},
+            {"id": 2, "nombre": "Caladitas x24 Und", "precio": 6750},
+            {"id": 3, "nombre": "Miga de Pan 1/2 Libra", "precio": 3750},
+            {"id": 4, "nombre": "Mogolla Masatera x6 Und", "precio": 3700},
+            {"id": 5, "nombre": "Brownie Americano x80 G", "precio": 3000},
+            {"id": 6, "nombre": "Ponque de Vino x245 G", "precio": 6150},
+            {"id": 7, "nombre": "Mermelada de Fresa x200 G", "precio": 5300},
+            {"id": 8, "nombre": "Mini Cholita x12 Und", "precio": 11950},
+            {"id": 9, "nombre": "Galletas de Mora x6 Und", "precio": 6550},
+            {"id": 10, "nombre": "Pan Frutos Rojos 400 G", "precio": 7900},
+        ]
+        self.carrito = []
+
+    def mostrar_productos(self):
+        print("Opciones de productos:")
+        for producto in self.productos:
+            print(f"{producto['id']}: {producto['nombre']} - {producto['precio']} COP")
+
+    def agregar_producto(self):
+        self.mostrar_productos()
+        producto_id = int(input("Seleccione el número del producto que desea agregar al carrito: "))
+        cantidad = int(input("Ingrese la cantidad de paquetes que desea: "))
+
+        producto = next((p for p in self.productos if p["id"] == producto_id), None)
+        if producto:
+            self.carrito.append({"producto": producto, "cantidad": cantidad})
+            print(f"Agregado al carrito: {producto['nombre']} - {cantidad} unidad(es)")
+        else:
+            print("Producto no encontrado. Intente de nuevo.")
+
+    def total_carrito(self):
+        total = sum(p["producto"]["precio"] * p["cantidad"] for p in self.carrito)
+        return total
+
+    def finalizar_compra(self):
+        print("\nResumen de su compra:")
+        for item in self.carrito:
+            producto = item["producto"]
+            cantidad = item["cantidad"]
+            print(f"{producto['nombre']} - {cantidad} unidad(es) - {producto['precio'] * cantidad} COP")
+        print(f"\nTotal a pagar: {self.total_carrito()} COP")
+
+# Uso
+carrito = CarritoCompras()
+
+while True:
+    print("\n1. Agregar producto al carrito")
+    print("2. Finalizar compra")
+    opcion = int(input("Seleccione una opción: "))
+
+    if opcion == 1:
+        carrito.agregar_producto()
+    elif opcion == 2:
+        carrito.finalizar_compra()
+        break
+    else:
+        print("Opción inválida. Intente de nuevo.")
