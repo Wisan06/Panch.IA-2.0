@@ -1,0 +1,25 @@
+import requests
+
+class CatalogoProductos:
+    def __init__(self, api_url):
+        self.api_url = api_url
+        self.productos = []
+
+    def obtener_productos(self):
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36"
+        }
+        response = requests.get(self.api_url, headers=headers)
+        if response.status_code == 200:
+            self.productos = response.json()
+        else:
+            print(f"Error al obtener el catálogo: {response.status_code}")
+
+    def mostrar_catalogo(self):
+        for producto in self.productos:
+            print(f"{producto['nombre']} - Precio: {producto['precio']}")
+
+# Uso
+catalogo = CatalogoProductos("https://comapan.apedir.co/marcas/Comapan")
+catalogo.obtener_productos()
+catalogo.mostrar_catalogo()
